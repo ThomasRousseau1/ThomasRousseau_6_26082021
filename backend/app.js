@@ -1,12 +1,13 @@
-const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');//Pour accéder au chemin de système de fichiers, les images
 
-// const sauceRoutes = require('./routes/sauce');
+const sauceRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
-
-mongoose.connect('mongodb+srv://TotoP6:Javascriptitnotthateasy500@cluster0.ocd2m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+const login = process.env.MONGO_USER;
+const password = process.env.MONGO_PASSWORD;
+mongoose.connect(`mongodb+srv://${login}:${password}@cluster0.ocd2m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -21,8 +22,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/api/sauce', sauceRoutes);
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json());
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);//Import du router auth.js
 
 
