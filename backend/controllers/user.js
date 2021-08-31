@@ -21,6 +21,7 @@ exports.signup = (req, res, next) => {
 
 
 exports.login = (req, res, next) => {
+    console.dir(req.headers.authorization);
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
