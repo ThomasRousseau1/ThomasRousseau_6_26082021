@@ -41,6 +41,44 @@ exports.deleteSauce = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
+//Controller pour gérer les likes
+exports.createLike = (req, res, next) => {
+    Sauce.findOne({ 
+        _id: req.params.id
+    })
+    .then(sauce => {
+        //Dans le cas où la personne dislike la sauce
+        if (req.body.like == -1) {
+            sauce.dislikes++;
+            sauce.usersDisliked.push(req.body.userId);
+            sauce.save();
+        }
+        //Dans le cas où la personne like la sauce
+        if (req.body.like == 1) {
+            sauce.likes++; //Ajout d'un like
+            sauce.usersLiked.push(req.body.userId);//Push du username et de son dislike dans le tableau 
+            sauce.save();
+        }    
+
+        //
+        if (req.body.like == 0) {
+            if (sauce.usersLiked.indexOf(req.body.userId) != -1) {
+            sauce.likes--;//Suppression du like
+            sauce.usersLiked.splice(sauce.usersLiked.indexOf(req.body.userId), 1)
+
+        } else {
+            sauce.dislikes--;//Suppression du dislike 
+            sauce.usersDisliked.splice(sauce.usersDisliked.indexOf(req.body.userId), 1);
+        }
+        sauce.save();
+    }
+        res.status(200).json({ message: "L'utilisateur a liké la sauce !"})
+    })
+    .catch(error => {
+    res.status(500).json({ error })
+    });
+};
+
 //Controller pour récupérer une seule sauce
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
