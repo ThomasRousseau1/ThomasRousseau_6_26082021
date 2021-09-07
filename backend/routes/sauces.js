@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+//Importation du middleware puis rajout de auth sur lees routes pour les sécuriser
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
-
 const sauceCtrl = require('../controllers/sauce');
 
 router.get('/', auth, sauceCtrl.getAllSauces);

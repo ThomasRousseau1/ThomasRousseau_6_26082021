@@ -14,11 +14,13 @@ mongoose.connect(`mongodb+srv://${login}:${password}@cluster0.ocd2m.mongodb.net/
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
+//express sera appelé partout où est utilisé app 
 
+//Middleware pour contrer l'erreur de CORS bloquant les appels HTTP
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Origin', '*');//Pour accéder à l'API depuis n'importe quelle origine
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');//Pour ajouter les headers mentionnés aux requêtes envoyées vers l'API
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');//Pour permettre d'envoyer les requêtes mentionnées
   next();
 });
 
