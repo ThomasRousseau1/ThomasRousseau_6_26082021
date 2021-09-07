@@ -9,6 +9,7 @@ const login = process.env.MONGO_USER;
 const password = process.env.MONGO_PASSWORD;
 mongoose.connect(`mongodb+srv://${login}:${password}@cluster0.ocd2m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
+    useCreateIndex: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
