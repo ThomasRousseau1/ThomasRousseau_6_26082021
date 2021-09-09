@@ -1,26 +1,21 @@
 ![PIIQUANTE](https://user.oc-static.com/upload/2021/07/29/16275605596354_PiiquanteLogo.png)
 
-## Le Projet : 
+# Le Projet : 
 Sixième projet à réaliser dans le cadre de la formation Développeur Web d'Openclassrooms. L'objectif est d'implémenter la partie backend d'une application web de critique de sauces piquantes. 
+
+# Installation : 
 
 ## Repo du projet d'origine : 
 Voici le repo contenant le frontend du projet et les informations pour initialiser le projet : https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6
+Il vous suffit de le cloner dans VS Code.
 
-## Dépendances : 
-Vous aurez besoin d'installer les dépendances suivantes : 
-- Express 
-- Mongoose(pour MongoDB)
-- Mongoose unique validator 
-- Bcrypt 
-- Multer 
-- Jsonwebtoken
-- Nodemon
-   
-### Pour lancer le backend : 
-Allez dans le terminal de commandes et tapez cd backend puis nodemon server. 
+## Pour lancer le backend : 
+Allez dans le terminal de commandes, faites npm install et tapez cd backend puis nodemon server. 
 
-### Pour lancer le frontend : 
-Allez dans le terminal et tapez cd frontend puis npm start.
+Il vous faudra rajouter un dossier 'images' dans le backend qui permettra au moment de la création d'une sauce, d'ajouter l'image dans ce dossier.
+
+## Pour lancer le frontend : 
+Allez dans le terminal, faites npm install et tapez cd frontend puis npm start.
 
 ## Sécurité pour mongoDB
-Dans app.js, dans la fonction mongoose.connect, le login et password ne sont pas directement affichés. Je les ai préalablement mis dans des variables d'environnement pour une question de sécurité. 
+Dans app.js, dans la fonction mongoose.connect, l'url de connexion à mongoDB n'est pas directement affiché. Je l'ai préalablement mis dans une variable d'environnement pour une question de sécurité. L'url se trouve dans le fichier .env.
