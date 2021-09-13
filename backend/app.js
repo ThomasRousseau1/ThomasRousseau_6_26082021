@@ -1,21 +1,28 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');//Pour accéder au chemin de système de fichiers, les images
+
+//Pour accéder au chemin de système de fichiers, les images
+const path = require('path');
+
+//Appel du module Helmet qui permet d'améliorer la sécurité de l'appli en sécurisant les requêtes http, les entêtes, empêcher le détournement de clics 
+const helmet = require('helmet');
+const nocache = require('nocache');
 
 const sauceRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
+require('dotenv').config();
 
-const login = process.env.MONGO_USER;
-const password = process.env.MONGO_PASSWORD;
-mongoose.connect(`mongodb+srv://${login}:${password}@cluster0.ocd2m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+//Connection à la base de données mongoDB avec l'url contenant le login et le password dans une variable d'environnement 
+mongoose.connect(process.env.MONGO_URL,
   { useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-const app = express();
 //express sera appelé partout où est utilisé app 
+const app = express();
+
 
 //Middleware pour contrer l'erreur de CORS bloquant les appels HTTP
 app.use((req, res, next) => {
@@ -25,6 +32,13 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.use(helmet());
+
+//Permet de désactiver la mise en cache du navigateur
+app.use(nocache());
+
+//Middleware permettant de parser les requêtes envoyées par l'utilisateur
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
 
