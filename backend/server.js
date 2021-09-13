@@ -1,3 +1,4 @@
+//Importation du package http de Node
 const http = require('http');
 const app = require('./app');
 
@@ -12,9 +13,12 @@ const normalizePort = val => {
   }
   return false;
 };
+
+//Définition du port 3000
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+//Pour gérer les différentes erreurs grâce à errorHandler
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;
@@ -35,6 +39,7 @@ const errorHandler = error => {
   }
 };
 
+//Mise en place du server 
 const server = http.createServer(app);
 
 server.on('error', errorHandler);
