@@ -35,7 +35,7 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(                    
                                { userId: user._id },//Données qu'on veut encoder dans le token(payload)   
-                               'RANDOM_TOKEN_SECRET',//Clef secrète pour l'encodage
+                               process.env.TOKEN,//Clef secrète pour l'encodage
                                { expiresIn: '24h'}//Date d'expiration du token                   
                         )
                     });
