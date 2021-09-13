@@ -1,7 +1,8 @@
 //Importation du package http de Node
-const http = require('http');
-const app = require('./app');
+const http = require('http'); //Importation du package http
+const app = require('./app'); // Importation d'app pour utiliser l'appli sur le server
 
+// normalizePort nous renvoi un port valide et configure le port de connexion en fonction de l'environnement
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -14,7 +15,7 @@ const normalizePort = val => {
   return false;
 };
 
-//Définition du port 3000
+// Si le port de connexion n'est pas déclaré par l'environnement, écouter sur le port 3000
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -39,9 +40,10 @@ const errorHandler = error => {
   }
 };
 
-//Mise en place du server 
+//Mise en place du server avec express en utilisant app
 const server = http.createServer(app);
 
+//Pour gérer les erreurs et lancer le server en nous affichant le port de connexion 
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
@@ -49,4 +51,5 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
+//Ecoute du port déclaré ci-dessus
 server.listen(port);
