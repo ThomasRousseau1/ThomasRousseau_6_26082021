@@ -20,5 +20,5 @@ Allez dans le terminal, faites npm install et tapez cd frontend puis npm start.
 ## Test
 Dans app.js, dans la fonction mongoose.connect, l'url de connexion à mongoDB n'est pas directement affiché. Je l'ai préalablement mis dans une variable d'environnement pour une question de sécurité. C'est également le cas pour le token. L'url et le token doivent être créés dans un fichier .env comme ci-desssous : 
 
-MONGO_URL = mongodb+srv://TotoP6:Javascriptitnotthateasy500@cluster0.ocd2m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+MONGO_URL = mongodb+srv://TotoP6:Javascriptitnotthateasy500@cluster0.ocd2m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority 
 TOKEN = RANDOM_TOKEN_SECRET
